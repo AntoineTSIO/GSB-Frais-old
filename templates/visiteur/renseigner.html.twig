@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="accueil">
+        <h5>GSB Frais</h5>
+    </a>
+    <span class="navbar-header text-center">
+      <h3>Espace Visiteur</h3>
+      <h7>Renseignement Fiches de Frais</h7>
+    </span>
+    <span class="navbar-text">
+      <h5>{{app.session.get('prenom')}} {{app.session.get('nom')}}</h5>
+    </span>
+  </div>
+</nav>
+<div>
+  
+
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="accueil">
+        <h5>GSB Frais</h5>
+    </a>
+    <span class="navbar-header">
+      <h3>Espace Visiteur</h3>
+    </span>
+    <span class="navbar-text">
+      <h5>{{app.session.get('prenom')}} {{app.session.get('nom')}}</h5>
+    </span>
+  </div>
+</nav>
+
+<div class="container">
+  <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#consulter">
+    Consulter une Fiche de Frais
+  </button>
+  <button type="button" class="btn btn-outline-info" onclick="location.href='visiteur/renseigner'">
+    Renseigner une Fiche de Frais
+  </button>
+</div>
+
+<div class="modal fade" id="consulter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sélection du mois a consulter</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="visiteur_consulter" method="post">
+          <label for="month">Veuillez saisir ci-dessous le mois souhaitant être consulté :
+          <br>(Veillez à utiliser le format mmyyyy)</label>
+            <input id="month" type="month" name="month" required pattern="[0-9]{6}">
+          <span class="validity"></span>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-success" onclick="location.href='visiteur/consulter'">Valider</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
