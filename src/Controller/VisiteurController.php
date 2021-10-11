@@ -17,8 +17,9 @@ class VisiteurController extends AbstractController {
         ]);
     }
 
-    public function consulter(Request $request): Response {
-        
+    public function consulterFicheFrais(Request $request): Response
+    {
+
         try{
             $dbName = 'gsbFrais';
             $host = 'localhost';
@@ -26,27 +27,30 @@ class VisiteurController extends AbstractController {
             $motDePasse = 'azerty';
             $port = '3306';
             $dns = 'mysql:host='.$host.';dbname='.$dbName.';port='.$port;
-            $connexion = new PDO($dns,$utilisateur,$motDePasse);
+            $connection = new PDO( $dns, $utilisateur, $motDePasse);
         } catch (PDOException $e) {
-            echo "Connexion Impossible :".$e;
+            echo "connection impossible : " . $e;
             die();
         }
+        
+        $mois = $request->request->get('mois');
+        $annee = $request->request->get('annee');
+        $dateFiche = $mois . $annee;
 
-        $moisConsulté = $request->request->get('month');
-        $requete = $connexion->query("SELECT * FROM FicheFrais WHERE mois='$moisConsulté'");
-        $ficheFrais = $requete->fetchall();
+        $requete = $connection->query('SELECT * FROM FicheFrais where mois = ' . $dateFiche );
+        $FicheFrais = $requete->fetchall();
 
-        return $this->render('visiteur/consulter.html.twig', [
-            'ficheFrais' => $ficheFrais
+        return $this->render('visiteur/consulterFicheFrais.html.twig', [
+            'ficheFrais' => $FicheFrais
         ]);
     }
 
-    public function renseigner(): Response {
+    public function renseignerFicheFrais(): Response {
 
         $em = $this->getDoctrine()->getManager();
         $repositoryFicheFrais = $em->getRepository(Entity\Fichefrais::class);
 
-        return $this->render('visiteur/renseigner.html.twig', [
+        return $this->render('visiteur/renseignerFicheFrais.html.twig', [
             'controller_name' => 'VisiteurController',
         ]);
     }

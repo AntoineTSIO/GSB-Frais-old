@@ -35,7 +35,8 @@ class ConnexionController extends AbstractController
                 $session->set('nom', $visiteur->getNom());
                 $session->set('prenom', $visiteur->getPrenom());
                 $session->set('idVisteur', $visiteur->getId());
-                return $this->render('visiteur/index.html.twig');
+
+                return $this->redirect('/visiteur');
             }
         }
         
@@ -47,10 +48,16 @@ class ConnexionController extends AbstractController
                 $session->set('login', $comptable->getLogin());
                 $session->set('nom', $comptable->getNom());
                 $session->set('prenom', $comptable->getPrenom());
-                return $this->render('comptable/index.html.twig');
+
+                return $this->redirect('/visiteur');
+                
             }
         }
-        return $this->render('connexion/index.html.twig');       
+        $connexionFailure = 1;
+                
+        return $this->redirectToRoute('/connexion', [
+            'connexionFailure' => $connexionFailure
+        ]);       
     }
 }
 ?>

@@ -18,13 +18,13 @@ visiteur:
     path: /visiteur
     controller: App\Controller\VisiteurController::index
 
-visiteur_consulter:
-    path: /visiteur/consulter
-    controller: App\Controller\VisiteurController::consulter
+consulterFicheFrais:
+    path: /visiteur/consulterFicheFrais
+    controller: App\Controller\VisiteurController::consulterFicheFrais
 
-visiteur_renseiger:
-    path: /visiteur/renseigner
-    controller: App\Controller\VisiteurController::renseigner
+renseignerFicheFrais:
+    path: /visiteur/renseignerFicheFrais
+    controller: App\Controller\VisiteurController::renseignerFicheFrais
 
 comptable:
     path: /comptable
